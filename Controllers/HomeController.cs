@@ -1,9 +1,11 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using smk_travel.Models;
+using admin_cms.Models.Infraestrutura.Autenticacao;
 
 namespace smk_travel.Controllers;
 
+[Logado]
 public class HomeController : Controller
 {
     public IActionResult Index()

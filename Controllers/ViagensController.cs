@@ -7,172 +7,173 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using smk_travel.Models;
 using smk_travel.Servicos.Database;
+using admin_cms.Models.Infraestrutura.Autenticacao;
 
-namespace smk_travel.Controllers
+namespace smk_travel.Controllers;
+
+[Logado]
+public class ViagensController : Controller
 {
-    public class ViagensController : Controller
+    private readonly DbContexto _context;
+
+    public ViagensController(DbContexto context)
     {
-        private readonly DbContexto _context;
+        _context = context;
+    }
 
-        public ViagensController(DbContexto context)
+    // GET: Viagens
+    public async Task<IActionResult> Index()
+    {
+        var dbContexto = _context.Viagens.Include(v => v.Alojamento).Include(v => v.CompanhiaAerea).Include(v => v.Funcionario).Include(v => v.Itinerario);
+        return View(await dbContexto.ToListAsync());
+    }
+
+    // GET: Viagens/Details/5
+    public async Task<IActionResult> Details(int? id)
+    {
+        if (id == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        // GET: Viagens
-        public async Task<IActionResult> Index()
+        var viagem = await _context.Viagens
+            .Include(v => v.Alojamento)
+            .Include(v => v.CompanhiaAerea)
+            .Include(v => v.Funcionario)
+            .Include(v => v.Itinerario)
+            .FirstOrDefaultAsync(m => m.Id == id);
+        if (viagem == null)
         {
-            var dbContexto = _context.Viagens.Include(v => v.Alojamento).Include(v => v.CompanhiaAerea).Include(v => v.Funcionario).Include(v => v.Itinerario);
-            return View(await dbContexto.ToListAsync());
+            return NotFound();
         }
 
-        // GET: Viagens/Details/5
-        public async Task<IActionResult> Details(int? id)
+        return View(viagem);
+    }
+
+    // GET: Viagens/Create
+    public IActionResult Create()
+    {
+        ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo");
+        ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo");
+        ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo");
+        ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo");
+        return View();
+    }
+
+    // POST: Viagens/Create
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create([Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao")] Viagem viagem)
+    {
+        if (ModelState.IsValid)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var viagem = await _context.Viagens
-                .Include(v => v.Alojamento)
-                .Include(v => v.CompanhiaAerea)
-                .Include(v => v.Funcionario)
-                .Include(v => v.Itinerario)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (viagem == null)
-            {
-                return NotFound();
-            }
-
-            return View(viagem);
-        }
-
-        // GET: Viagens/Create
-        public IActionResult Create()
-        {
-            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo");
-            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo");
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo");
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo");
-            return View();
-        }
-
-        // POST: Viagens/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao")] Viagem viagem)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(viagem);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
-            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
-            return View(viagem);
-        }
-
-        // GET: Viagens/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var viagem = await _context.Viagens.FindAsync(id);
-            if (viagem == null)
-            {
-                return NotFound();
-            }
-            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
-            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
-            return View(viagem);
-        }
-
-        // POST: Viagens/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao")] Viagem viagem)
-        {
-            if (id != viagem.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(viagem);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ViagemExists(viagem.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
-            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
-            return View(viagem);
-        }
-
-        // GET: Viagens/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var viagem = await _context.Viagens
-                .Include(v => v.Alojamento)
-                .Include(v => v.CompanhiaAerea)
-                .Include(v => v.Funcionario)
-                .Include(v => v.Itinerario)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (viagem == null)
-            {
-                return NotFound();
-            }
-
-            return View(viagem);
-        }
-
-        // POST: Viagens/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var viagem = await _context.Viagens.FindAsync(id);
-            _context.Viagens.Remove(viagem);
+            _context.Add(viagem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
+        ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
+        ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
+        ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
+        return View(viagem);
+    }
 
-        private bool ViagemExists(int id)
+    // GET: Viagens/Edit/5
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
         {
-            return _context.Viagens.Any(e => e.Id == id);
+            return NotFound();
         }
+
+        var viagem = await _context.Viagens.FindAsync(id);
+        if (viagem == null)
+        {
+            return NotFound();
+        }
+        ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
+        ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
+        ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
+        ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
+        return View(viagem);
+    }
+
+    // POST: Viagens/Edit/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao")] Viagem viagem)
+    {
+        if (id != viagem.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _context.Update(viagem);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ViagemExists(viagem.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
+        ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
+        ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
+        ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
+        return View(viagem);
+    }
+
+    // GET: Viagens/Delete/5
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var viagem = await _context.Viagens
+            .Include(v => v.Alojamento)
+            .Include(v => v.CompanhiaAerea)
+            .Include(v => v.Funcionario)
+            .Include(v => v.Itinerario)
+            .FirstOrDefaultAsync(m => m.Id == id);
+        if (viagem == null)
+        {
+            return NotFound();
+        }
+
+        return View(viagem);
+    }
+
+    // POST: Viagens/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var viagem = await _context.Viagens.FindAsync(id);
+        _context.Viagens.Remove(viagem);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+
+    private bool ViagemExists(int id)
+    {
+        return _context.Viagens.Any(e => e.Id == id);
     }
 }
