@@ -51,60 +51,59 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Cadastros
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/administradores">
-                    <span>Administradores</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCadastros"
+                    aria-expanded="true" aria-controls="collapseCadastros">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Cadastros</span>
                 </a>
+                <div id="collapseCadastros" class="collapse" aria-labelledby="headingCadastros"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/funcionarios">
+                            <span>Funcionarios</span>
+                        </a>
+                        <a class="collapse-item" href="/administradores">
+                            <span>Administradores</span>
+                        </a>
+                        <a class="collapse-item" href="/alojamentos">
+                            <span>Alojamentos</span>
+                        </a>
+                        <a class="collapse-item" href="/centrodecustos">
+                            <span>Centro de custos</span>
+                        </a>
+                        <a class="collapse-item" href="/companhiaaereas">
+                            <span>Companhia aéreas</span>
+                        </a>
+                        <a class="collapse-item" href="/departamentos">
+                            <span>Departamentos</span>
+                        </a>
+                        <a class="collapse-item" href="/itinerarios">
+                            <span>Itinerarios</span>
+                        </a>
+                        <a class="collapse-item" href="/viagens">
+                            <span>Viagens</span>
+                        </a>
+                    </div>
+                </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/alojamentos">
-                    <span>Alojamentos</span>
-                </a>
-            </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/centrodecustos">
-                    <span>Centro de custos</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTravel"
+                    aria-expanded="true" aria-controls="collapseTravel">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Travel</span>
                 </a>
+                <div id="collapseTravel" class="collapse" aria-labelledby="headingTravel"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/viagens">
+                            <span>Viagens</span>
+                        </a>
+                    </div>
+                </div>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/companhiaaereas">
-                    <span>Companhia aéreas</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/funcionarios">
-                    <span>Funcionarios</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/departamentos">
-                    <span>Departamentos</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/itinerarios">
-                    <span>Itinerarios</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/viagens">
-                    <span>Viagens</span>
-                </a>
-            </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -295,8 +294,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="/thema-bootratrap/img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="/thema-bootratrap/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -392,7 +390,7 @@
     <!-- Page level custom scripts -->
     <script src="/thema-bootratrap/js/demo/chart-area-demo.js"></script>
     <script src="/thema-bootratrap/js/demo/chart-pie-demo.js"></script>
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
