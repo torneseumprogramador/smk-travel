@@ -41,7 +41,7 @@ namespace smk_travel.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "centro_de_custos",
+                name: "centroDeCustos",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -55,7 +55,7 @@ namespace smk_travel.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CompanhiaAerias",
+                name: "CompanhiaAereas",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -65,7 +65,7 @@ namespace smk_travel.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CompanhiaAerias", x => x.id);
+                    table.PrimaryKey("PK_CompanhiaAereas", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,7 +132,7 @@ namespace smk_travel.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     funcionarioId = table.Column<int>(type: "int", nullable: false),
                     itinerarioId = table.Column<int>(type: "int", nullable: false),
-                    companhiaAeriaId = table.Column<int>(type: "int", nullable: false),
+                    CompanhiaAereaId = table.Column<int>(type: "int", nullable: false),
                     dataSaida = table.Column<DateTime>(type: "datetime2", nullable: false),
                     dataChagada = table.Column<DateTime>(type: "datetime2", nullable: false),
                     alojamentoId = table.Column<int>(type: "int", nullable: false),
@@ -153,9 +153,9 @@ namespace smk_travel.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_viagens_CompanhiaAerias_companhiaAeriaId",
-                        column: x => x.companhiaAeriaId,
-                        principalTable: "CompanhiaAerias",
+                        name: "FK_viagens_CompanhiaAereas_CompanhiaAereaId",
+                        column: x => x.CompanhiaAereaId,
+                        principalTable: "CompanhiaAereas",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -188,9 +188,9 @@ namespace smk_travel.Migrations
                 column: "alojamentoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_viagens_companhiaAeriaId",
+                name: "IX_viagens_CompanhiaAereaId",
                 table: "viagens",
-                column: "companhiaAeriaId");
+                column: "CompanhiaAereaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_viagens_funcionarioId",
@@ -215,7 +215,7 @@ namespace smk_travel.Migrations
                 name: "alojamentos");
 
             migrationBuilder.DropTable(
-                name: "CompanhiaAerias");
+                name: "CompanhiaAereas");
 
             migrationBuilder.DropTable(
                 name: "funcionarios");

@@ -120,7 +120,7 @@ namespace smk_travel.Migrations
                     b.ToTable("centro_de_custos");
                 });
 
-            modelBuilder.Entity("smk_travel.Models.CompanhiaAeria", b =>
+            modelBuilder.Entity("smk_travel.Models.CompanhiaAerea", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,7 +143,7 @@ namespace smk_travel.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CompanhiaAerias");
+                    b.ToTable("CompanhiaAereas");
                 });
 
             modelBuilder.Entity("smk_travel.Models.Departamento", b =>
@@ -254,9 +254,9 @@ namespace smk_travel.Migrations
                         .HasColumnType("Text")
                         .HasColumnName("comentarios");
 
-                    b.Property<int>("CompanhiaAeriaId")
+                    b.Property<int>("CompanhiaAereaId")
                         .HasColumnType("int")
-                        .HasColumnName("companhiaAeriaId");
+                        .HasColumnName("CompanhiaAereaId");
 
                     b.Property<DateTime>("DataAtualizacao")
                         .HasColumnType("datetime2")
@@ -298,7 +298,7 @@ namespace smk_travel.Migrations
 
                     b.HasIndex("AlojamentoId");
 
-                    b.HasIndex("CompanhiaAeriaId");
+                    b.HasIndex("CompanhiaAereaId");
 
                     b.HasIndex("FuncionarioId");
 
@@ -334,9 +334,9 @@ namespace smk_travel.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("smk_travel.Models.CompanhiaAeria", "CompanhiaAeria")
+                    b.HasOne("smk_travel.Models.CompanhiaAerea", "CompanhiaAerea")
                         .WithMany()
-                        .HasForeignKey("CompanhiaAeriaId")
+                        .HasForeignKey("CompanhiaAereaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -354,7 +354,7 @@ namespace smk_travel.Migrations
 
                     b.Navigation("Alojamento");
 
-                    b.Navigation("CompanhiaAeria");
+                    b.Navigation("CompanhiaAerea");
 
                     b.Navigation("Funcionario");
 

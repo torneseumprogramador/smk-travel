@@ -11,7 +11,7 @@ namespace smk_travel.Servicos.Database
         public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Alojamento> Alojamentos { get; set; }
         public DbSet<CentroDeCusto> CentroDeCustos { get; set; }
-        public DbSet<CompanhiaAeria> CompanhiaAerias { get; set; }
+        public DbSet<CompanhiaAerea> CompanhiaAereas { get; set; }
         public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<Itinerario> Itinerarios { get; set; }

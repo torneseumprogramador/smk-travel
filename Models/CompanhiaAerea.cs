@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace smk_travel.Models;
 
-[Table("CompanhiaAerias")]
-public class CompanhiaAeria
+[Table("companhiaAereas")]
+public class CompanhiaAerea
 {
     [Key]
     [Required]

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace smk_travel.Models;
 
-[Table("centro_de_custos")]
+[Table("centroDeCustos")]
 public class CentroDeCusto
 {
     [Key]

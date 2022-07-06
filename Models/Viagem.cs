@@ -24,9 +24,9 @@ public class Viagem
     public Itinerario Itinerario { get; set; }
 
     [Required]
-    [Column("companhiaAeriaId")]
-    public int CompanhiaAeriaId { get; set; }
-    public CompanhiaAeria CompanhiaAeria { get; set; }
+    [Column("CompanhiaAereaId")]
+    public int CompanhiaAereaId { get; set; }
+    public CompanhiaAerea CompanhiaAerea { get; set; }
 
     [Required]
     [Column("dataSaida")]

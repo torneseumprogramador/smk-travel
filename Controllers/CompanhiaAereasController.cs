@@ -10,22 +10,22 @@ using smk_travel.Servicos.Database;
 
 namespace smk_travel.Controllers
 {
-    public class CompanhiaAeriasController : Controller
+    public class CompanhiaAereasController : Controller
     {
         private readonly DbContexto _context;
 
-        public CompanhiaAeriasController(DbContexto context)
+        public CompanhiaAereasController(DbContexto context)
         {
             _context = context;
         }
 
-        // GET: CompanhiaAerias
+        // GET: CompanhiaAereas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CompanhiaAerias.ToListAsync());
+            return View(await _context.CompanhiaAereas.ToListAsync());
         }
 
-        // GET: CompanhiaAerias/Details/5
+        // GET: CompanhiaAereas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var companhiaAeria = await _context.CompanhiaAerias
+            var CompanhiaAerea = await _context.CompanhiaAereas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (companhiaAeria == null)
+            if (CompanhiaAerea == null)
             {
                 return NotFound();
             }
 
-            return View(companhiaAeria);
+            return View(CompanhiaAerea);
         }
 
-        // GET: CompanhiaAerias/Create
+        // GET: CompanhiaAereas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CompanhiaAerias/Create
+        // POST: CompanhiaAereas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Codigo,Nome")] CompanhiaAeria companhiaAeria)
+        public async Task<IActionResult> Create([Bind("Id,Codigo,Nome")] CompanhiaAerea CompanhiaAerea)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(companhiaAeria);
+                _context.Add(CompanhiaAerea);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(companhiaAeria);
+            return View(CompanhiaAerea);
         }
 
-        // GET: CompanhiaAerias/Edit/5
+        // GET: CompanhiaAereas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var companhiaAeria = await _context.CompanhiaAerias.FindAsync(id);
-            if (companhiaAeria == null)
+            var CompanhiaAerea = await _context.CompanhiaAereas.FindAsync(id);
+            if (CompanhiaAerea == null)
             {
                 return NotFound();
             }
-            return View(companhiaAeria);
+            return View(CompanhiaAerea);
         }
 
-        // POST: CompanhiaAerias/Edit/5
+        // POST: CompanhiaAereas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Codigo,Nome")] CompanhiaAeria companhiaAeria)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Codigo,Nome")] CompanhiaAerea CompanhiaAerea)
         {
-            if (id != companhiaAeria.Id)
+            if (id != CompanhiaAerea.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace smk_travel.Controllers
             {
                 try
                 {
-                    _context.Update(companhiaAeria);
+                    _context.Update(CompanhiaAerea);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompanhiaAeriaExists(companhiaAeria.Id))
+                    if (!CompanhiaAereaExists(CompanhiaAerea.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace smk_travel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(companhiaAeria);
+            return View(CompanhiaAerea);
         }
 
-        // GET: CompanhiaAerias/Delete/5
+        // GET: CompanhiaAereas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var companhiaAeria = await _context.CompanhiaAerias
+            var CompanhiaAerea = await _context.CompanhiaAereas
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (companhiaAeria == null)
+            if (CompanhiaAerea == null)
             {
                 return NotFound();
             }
 
-            return View(companhiaAeria);
+            return View(CompanhiaAerea);
         }
 
-        // POST: CompanhiaAerias/Delete/5
+        // POST: CompanhiaAereas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var companhiaAeria = await _context.CompanhiaAerias.FindAsync(id);
-            _context.CompanhiaAerias.Remove(companhiaAeria);
+            var CompanhiaAerea = await _context.CompanhiaAereas.FindAsync(id);
+            _context.CompanhiaAereas.Remove(CompanhiaAerea);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CompanhiaAeriaExists(int id)
+        private bool CompanhiaAereaExists(int id)
         {
-            return _context.CompanhiaAerias.Any(e => e.Id == id);
+            return _context.CompanhiaAereas.Any(e => e.Id == id);
         }
     }
 }

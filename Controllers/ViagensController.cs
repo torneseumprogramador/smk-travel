@@ -22,7 +22,7 @@ namespace smk_travel.Controllers
         // GET: Viagens
         public async Task<IActionResult> Index()
         {
-            var dbContexto = _context.Viagens.Include(v => v.Alojamento).Include(v => v.CompanhiaAeria).Include(v => v.Funcionario).Include(v => v.Itinerario);
+            var dbContexto = _context.Viagens.Include(v => v.Alojamento).Include(v => v.CompanhiaAerea).Include(v => v.Funcionario).Include(v => v.Itinerario);
             return View(await dbContexto.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace smk_travel.Controllers
 
             var viagem = await _context.Viagens
                 .Include(v => v.Alojamento)
-                .Include(v => v.CompanhiaAeria)
+                .Include(v => v.CompanhiaAerea)
                 .Include(v => v.Funcionario)
                 .Include(v => v.Itinerario)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -52,7 +52,7 @@ namespace smk_travel.Controllers
         public IActionResult Create()
         {
             ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo");
-            ViewData["CompanhiaAeriaId"] = new SelectList(_context.CompanhiaAerias, "Id", "Codigo");
+            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo");
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo");
             ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo");
             return View();
@@ -63,7 +63,7 @@ namespace smk_travel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAeriaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao")] Viagem viagem)
+        public async Task<IActionResult> Create([Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao")] Viagem viagem)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace smk_travel.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
-            ViewData["CompanhiaAeriaId"] = new SelectList(_context.CompanhiaAerias, "Id", "Codigo", viagem.CompanhiaAeriaId);
+            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
             ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
             return View(viagem);
@@ -92,7 +92,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
             ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
-            ViewData["CompanhiaAeriaId"] = new SelectList(_context.CompanhiaAerias, "Id", "Codigo", viagem.CompanhiaAeriaId);
+            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
             ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
             return View(viagem);
@@ -103,7 +103,7 @@ namespace smk_travel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAeriaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao")] Viagem viagem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao")] Viagem viagem)
         {
             if (id != viagem.Id)
             {
@@ -131,7 +131,7 @@ namespace smk_travel.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
-            ViewData["CompanhiaAeriaId"] = new SelectList(_context.CompanhiaAerias, "Id", "Codigo", viagem.CompanhiaAeriaId);
+            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
             ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
             return View(viagem);
@@ -147,7 +147,7 @@ namespace smk_travel.Controllers
 
             var viagem = await _context.Viagens
                 .Include(v => v.Alojamento)
-                .Include(v => v.CompanhiaAeria)
+                .Include(v => v.CompanhiaAerea)
                 .Include(v => v.Funcionario)
                 .Include(v => v.Itinerario)
                 .FirstOrDefaultAsync(m => m.Id == id);
