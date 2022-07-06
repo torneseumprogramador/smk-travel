@@ -1,0 +1,101 @@
+@model IEnumerable<smk_travel.Models.Viagem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcionario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Itinerario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanhiaAeria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataSaida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataChagada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alojamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TesteCovid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comentarios)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hospede)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiasDeTrabalho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAtualizacao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcionario.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Itinerario.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanhiaAeria.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataSaida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataChagada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alojamento.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TesteCovid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentarios)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hospede)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiasDeTrabalho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCriacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAtualizacao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

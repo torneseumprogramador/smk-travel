@@ -8,6 +8,7 @@ namespace smk_travel.Servicos.Database
     {
         public DbContexto(DbContextOptions<DbContexto> options) : base(options) { }
         
+        public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Alojamento> Alojamentos { get; set; }
         public DbSet<CentroDeCusto> CentroDeCustos { get; set; }
         public DbSet<CompanhiaAeria> CompanhiaAerias { get; set; }
