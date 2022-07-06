@@ -5,16 +5,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace smk_travel.Models;
 
-[Table("travels")]
-public class Travel
+[Table("departamentos")]
+public class Departamento
 {
     [Key]
     [Required]
     [Column("id")]
     public int Id { get; set; }
 
+    [Required]
+    [Column("codigo")]
+    [MaxLength(50)]
+    public string Codigo { get; set; }
+
+    [Required]
     [MaxLength(150)]
     [Column("nome")]
-    [Required]
     public string Nome { get; set; }
 }
