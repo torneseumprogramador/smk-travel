@@ -1,3 +1,15 @@
+# Instruções para instalação
+``` bash
+git clone git@github.com:torneseumprogramador/smk-travel.git
+dotnet build
+# alterar a senha do banco de dados em DefaultConnection no arquivo abaixo:
+vim appsettings.json
+dotnet ef database update
+dotnet run
+```
+
+# Itens utilizados ao criar o sistema
+
 SQL Server by docker
 
 ```shell
