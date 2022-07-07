@@ -1,6 +1,7 @@
 # Instruções para instalação
 ``` bash
 git clone git@github.com:torneseumprogramador/smk-travel.git
+cd smk-travel/
 dotnet build
 # alterar a senha do banco de dados em DefaultConnection no arquivo abaixo:
 vim appsettings.json
