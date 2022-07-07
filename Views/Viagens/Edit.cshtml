@@ -74,6 +74,46 @@
                 <span asp-validation-for="DataAtualizacao" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Documento" class="control-label"></label>
+                <input asp-for="Documento" class="form-control" />
+                <span asp-validation-for="Documento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MotivoId" class="control-label"></label>
+                <select asp-for="MotivoId" class="form-control" asp-items="ViewBag.MotivoId"></select>
+                <span asp-validation-for="MotivoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Classeid" class="control-label"></label>
+                <select asp-for="Classeid" class="form-control" asp-items="ViewBag.Classeid"></select>
+                <span asp-validation-for="Classeid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoDeBilheteId" class="control-label"></label>
+                <select asp-for="TipoDeBilheteId" class="form-control" asp-items="ViewBag.TipoDeBilheteId"></select>
+                <span asp-validation-for="TipoDeBilheteId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstadoDaViagemId" class="control-label"></label>
+                <select asp-for="EstadoDaViagemId" class="form-control" asp-items="ViewBag.EstadoDaViagemId"></select>
+                <span asp-validation-for="EstadoDaViagemId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Valor" class="control-label"></label>
+                <input asp-for="Valor" class="form-control" />
+                <span asp-validation-for="Valor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Taxa" class="control-label"></label>
+                <input asp-for="Taxa" class="form-control" />
+                <span asp-validation-for="Taxa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Taxa1" class="control-label"></label>
+                <input asp-for="Taxa1" class="form-control" />
+                <span asp-validation-for="Taxa1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

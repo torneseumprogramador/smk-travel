@@ -48,6 +48,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.DataAtualizacao)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Motivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDeBilhete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoDaViagem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Taxa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Taxa1)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -89,6 +113,30 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataAtualizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Documento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Motivo.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Classe.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDeBilhete.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoDaViagem.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Taxa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Taxa1)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

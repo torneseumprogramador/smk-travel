@@ -16,5 +16,13 @@ namespace smk_travel.Servicos.Database
         public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<Itinerario> Itinerarios { get; set; }
         public DbSet<Viagem> Viagens { get; set; }
+        public DbSet<Classe> Classes { get; set; }
+        public DbSet<EstadoDaViagem> EstadoDaViagens { get; set; }
+        public DbSet<Fornecedor> Fornecedores { get; set; }
+        public DbSet<Motivo> Motivos { get; set; }
+        public DbSet<Processo> Processos { get; set; }
+        public DbSet<Site> Sites { get; set; }
+        public DbSet<TipoDeBilhete> TipoDeBilhetes { get; set; }
+
     }
 }

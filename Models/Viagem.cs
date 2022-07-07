@@ -64,4 +64,40 @@ public class Viagem
     [Required]
     [Column("dataAtualizacao")]
     public DateTime DataAtualizacao { get; set; }
+
+    [Required]
+    [Column("documento")]
+    public string Documento { get; set; }
+
+    [Required]
+    [Column("motivoId")]
+    public int MotivoId { get; set; }
+    public Motivo Motivo { get; set; }
+
+    [Required]
+    [Column("classeId")]
+    public int Classeid { get; set; }
+    public Classe Classe { get; set; }
+
+    [Required]
+    [Column("tipoDeBilheteId")]
+    public int TipoDeBilheteId { get; set; }
+    public TipoDeBilhete TipoDeBilhete { get; set; }
+
+    [Required]
+    [Column("estadoDaViagemId")]
+    public int EstadoDaViagemId { get; set; }
+    public EstadoDaViagem EstadoDaViagem { get; set; }
+
+    [Required]
+    [Column("valor")]
+    public double Valor { get; set; }
+
+    [Required]
+    [Column("taxa")]
+    public double Taxa { get; set; }
+
+    [Required]
+    [Column("taxa1")]
+    public double Taxa1 { get; set; }
 }
