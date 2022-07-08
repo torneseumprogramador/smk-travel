@@ -25,7 +25,7 @@
 <body>
     @RenderBody()
 
-    @Html.Partial("~/Views/Shared/_vendor_scripts.cshtml")
+    <partial name="_vendor_scripts"/>
     
     @RenderSection("scripts", required: false)
     

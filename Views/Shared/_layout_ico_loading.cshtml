@@ -3,9 +3,9 @@
 
 <head>
 
-    @Html.Partial("~/Views/Shared/_title_meta.cshtml")
+    <partial name="_title_meta"/>
     @RenderSection("styles", required: false)
-    @Html.Partial("~/Views/Shared/_head_css.cshtml")
+    <partial name="_head_css"/>
 
 </head>
 
@@ -13,7 +13,7 @@
 
     @RenderBody()
 
-    @*@Html.Partial("~/Views/Shared/_footer.cshtml")*@
+    @*<partial name="_footer"/>*@
 
     <!-- Footer start -->
     <footer class="landing-footer">
@@ -94,7 +94,7 @@
         <!-- end container -->
     </footer>
     <!-- Footer end -->
-    @Html.Partial("~/Views/Shared/_vendor_scripts.cshtml")
+    <partial name="_vendor_scripts"/>
 
     @RenderSection("scripts", required: false)
 
