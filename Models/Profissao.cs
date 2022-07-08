@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace smk_travel.Models;
 
-[Table("departamentos")]
-public class Departamento
+[Table("profissoes")]
+public class Profissao
 {
     [Key]
     [Required]
@@ -22,8 +22,4 @@ public class Departamento
     [MaxLength(150)]
     [Column("nome")]
     public string Nome { get; set; }
-
-    [Required]
-    [Column("funcionarioRepresentanteId")]
-    public int FuncionarioRepresentanteId { get; set; }
 }

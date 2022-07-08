@@ -32,5 +32,14 @@ public class Funcionario
     [Column("centroDeCustoId")]
     public int CentroDeCustoId { get; set; }
     public CentroDeCusto CentroDeCusto { get; set; }
-    
+
+    [Required]
+    [Column("entidadeId")]
+    public int EntidadeId { get; set; }
+    public Entidade Entidade { get; set; }
+
+    [Required]
+    [Column("profissaoId")]
+    public int ProfissaoId { get; set; }
+    public Profissao Profissao { get; set; }
 }

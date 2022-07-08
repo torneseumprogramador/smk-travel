@@ -11,6 +11,18 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroBilhete)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumeroBilhete)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Referencia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Referencia)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Funcionario)
         </dt>
         <dd class = "col-sm-10">
@@ -113,22 +125,58 @@
             @Html.DisplayFor(model => model.EstadoDaViagem.Codigo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Valor)
+            @Html.DisplayNameFor(model => model.TotalBilhete)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Valor)
+            @Html.DisplayFor(model => model.TotalBilhete)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Taxa)
+            @Html.DisplayNameFor(model => model.CustoBilhete)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Taxa)
+            @Html.DisplayFor(model => model.CustoBilhete)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Taxa1)
+            @Html.DisplayNameFor(model => model.CustoReemissao)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Taxa1)
+            @Html.DisplayFor(model => model.CustoReemissao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TaxaReembolso)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TaxaReembolso)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustoNoShow)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustoNoShow)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Processo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Processo.Comentarios)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataSolicitacaoInicio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataSolicitacaoInicio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataSolicitacaoFim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataSolicitacaoFim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Arquivo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Arquivo)
         </dd>
     </dl>
 </div>

@@ -58,6 +58,14 @@ public class Processo
     public DateTime Data { get; set; }
 
     [Required]
+    [Column("dataSolicitacaoInicio")]
+    public DateTime DataSolicitacaoInicio { get; set; }
+
+    [Required]
+    [Column("dataSolicitacaoFim")]
+    public DateTime DataSolicitacaoFim { get; set; }
+
+    [Required]
     [Column("dataCriacao")]
     public DateTime DataCriacao { get; set; }
 

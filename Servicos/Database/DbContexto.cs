@@ -23,6 +23,9 @@ namespace smk_travel.Servicos.Database
         public DbSet<Processo> Processos { get; set; }
         public DbSet<Site> Sites { get; set; }
         public DbSet<TipoDeBilhete> TipoDeBilhetes { get; set; }
+        public DbSet<smk_travel.Models.Entidade> Entidade { get; set; }
+        public DbSet<smk_travel.Models.Profissao> Profissao { get; set; }
+        public DbSet<smk_travel.Models.SituacaoViagem> SituacaoViagem { get; set; }
 
     }
 }

@@ -22,7 +22,7 @@ namespace smk_travel.Controllers
         // GET: Viagens
         public async Task<IActionResult> Index()
         {
-            var dbContexto = _context.Viagens.Include(v => v.Alojamento).Include(v => v.Classe).Include(v => v.CompanhiaAerea).Include(v => v.EstadoDaViagem).Include(v => v.Funcionario).Include(v => v.Itinerario).Include(v => v.Motivo).Include(v => v.TipoDeBilhete);
+            var dbContexto = _context.Viagens.Include(v => v.Alojamento).Include(v => v.Classe).Include(v => v.CompanhiaAerea).Include(v => v.EstadoDaViagem).Include(v => v.Funcionario).Include(v => v.Itinerario).Include(v => v.Motivo).Include(v => v.Processo).Include(v => v.TipoDeBilhete);
             return View(await dbContexto.ToListAsync());
         }
 
@@ -42,6 +42,7 @@ namespace smk_travel.Controllers
                 .Include(v => v.Funcionario)
                 .Include(v => v.Itinerario)
                 .Include(v => v.Motivo)
+                .Include(v => v.Processo)
                 .Include(v => v.TipoDeBilhete)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (viagem == null)
@@ -62,6 +63,7 @@ namespace smk_travel.Controllers
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo");
             ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo");
             ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo");
+            ViewData["ProcessoId"] = new SelectList(_context.Processos, "Id", "Comentarios");
             ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Codigo");
             return View();
         }
@@ -71,7 +73,7 @@ namespace smk_travel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao,Documento,MotivoId,Classeid,TipoDeBilheteId,EstadoDaViagemId,Valor,Taxa,Taxa1")] Viagem viagem)
+        public async Task<IActionResult> Create([Bind("Id,NumeroBilhete,Referencia,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao,Documento,MotivoId,Classeid,TipoDeBilheteId,EstadoDaViagemId,TotalBilhete,CustoBilhete,CustoReemissao,TaxaReembolso,CustoNoShow,ProcessoId,DataSolicitacaoInicio,DataSolicitacaoFim,Arquivo")] Viagem viagem)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +88,7 @@ namespace smk_travel.Controllers
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
             ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
             ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo", viagem.MotivoId);
+            ViewData["ProcessoId"] = new SelectList(_context.Processos, "Id", "Comentarios", viagem.ProcessoId);
             ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Codigo", viagem.TipoDeBilheteId);
             return View(viagem);
         }
@@ -110,6 +113,7 @@ namespace smk_travel.Controllers
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
             ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
             ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo", viagem.MotivoId);
+            ViewData["ProcessoId"] = new SelectList(_context.Processos, "Id", "Comentarios", viagem.ProcessoId);
             ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Codigo", viagem.TipoDeBilheteId);
             return View(viagem);
         }
@@ -119,7 +123,7 @@ namespace smk_travel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao,Documento,MotivoId,Classeid,TipoDeBilheteId,EstadoDaViagemId,Valor,Taxa,Taxa1")] Viagem viagem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NumeroBilhete,Referencia,FuncionarioId,ItinerarioId,CompanhiaAereaId,DataSaida,DataChagada,AlojamentoId,TesteCovid,Comentarios,Hospede,DiasDeTrabalho,DataCriacao,DataAtualizacao,Documento,MotivoId,Classeid,TipoDeBilheteId,EstadoDaViagemId,TotalBilhete,CustoBilhete,CustoReemissao,TaxaReembolso,CustoNoShow,ProcessoId,DataSolicitacaoInicio,DataSolicitacaoFim,Arquivo")] Viagem viagem)
         {
             if (id != viagem.Id)
             {
@@ -153,6 +157,7 @@ namespace smk_travel.Controllers
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
             ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
             ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo", viagem.MotivoId);
+            ViewData["ProcessoId"] = new SelectList(_context.Processos, "Id", "Comentarios", viagem.ProcessoId);
             ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Codigo", viagem.TipoDeBilheteId);
             return View(viagem);
         }
@@ -173,6 +178,7 @@ namespace smk_travel.Controllers
                 .Include(v => v.Funcionario)
                 .Include(v => v.Itinerario)
                 .Include(v => v.Motivo)
+                .Include(v => v.Processo)
                 .Include(v => v.TipoDeBilhete)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (viagem == null)

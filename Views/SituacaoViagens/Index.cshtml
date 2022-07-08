@@ -1,4 +1,4 @@
-@model IEnumerable<smk_travel.Models.Departamento>
+@model IEnumerable<smk_travel.Models.SituacaoViagem>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Codigo)
+                @Html.DisplayNameFor(model => model.Viagem)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.Situacao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FuncionarioRepresentanteId)
+                @Html.DisplayNameFor(model => model.Data)
             </th>
             <th></th>
         </tr>
@@ -28,13 +28,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
+                @Html.DisplayFor(modelItem => item.Viagem.Arquivo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
+                @Html.DisplayFor(modelItem => item.Situacao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FuncionarioRepresentanteId)
+                @Html.DisplayFor(modelItem => item.Data)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

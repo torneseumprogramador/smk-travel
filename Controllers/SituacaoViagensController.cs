@@ -10,22 +10,23 @@ using smk_travel.Servicos.Database;
 
 namespace smk_travel.Controllers
 {
-    public class DepartamentosController : Controller
+    public class SituacaoViagensController : Controller
     {
         private readonly DbContexto _context;
 
-        public DepartamentosController(DbContexto context)
+        public SituacaoViagensController(DbContexto context)
         {
             _context = context;
         }
 
-        // GET: Departamentos
+        // GET: SituacaoViagens
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Departamentos.ToListAsync());
+            var dbContexto = _context.SituacaoViagem.Include(s => s.Viagem);
+            return View(await dbContexto.ToListAsync());
         }
 
-        // GET: Departamentos/Details/5
+        // GET: SituacaoViagens/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos
+            var situacaoViagem = await _context.SituacaoViagem
+                .Include(s => s.Viagem)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (departamento == null)
+            if (situacaoViagem == null)
             {
                 return NotFound();
             }
 
-            return View(departamento);
+            return View(situacaoViagem);
         }
 
-        // GET: Departamentos/Create
+        // GET: SituacaoViagens/Create
         public IActionResult Create()
         {
+            ViewData["ViagemId"] = new SelectList(_context.Viagens, "Id", "Arquivo");
             return View();
         }
 
-        // POST: Departamentos/Create
+        // POST: SituacaoViagens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Codigo,Nome,FuncionarioRepresentanteId")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("Id,ViagemId,Situacao,Data")] SituacaoViagem situacaoViagem)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(departamento);
+                _context.Add(situacaoViagem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(departamento);
+            ViewData["ViagemId"] = new SelectList(_context.Viagens, "Id", "Arquivo", situacaoViagem.ViagemId);
+            return View(situacaoViagem);
         }
 
-        // GET: Departamentos/Edit/5
+        // GET: SituacaoViagens/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos.FindAsync(id);
-            if (departamento == null)
+            var situacaoViagem = await _context.SituacaoViagem.FindAsync(id);
+            if (situacaoViagem == null)
             {
                 return NotFound();
             }
-            return View(departamento);
+            ViewData["ViagemId"] = new SelectList(_context.Viagens, "Id", "Arquivo", situacaoViagem.ViagemId);
+            return View(situacaoViagem);
         }
 
-        // POST: Departamentos/Edit/5
+        // POST: SituacaoViagens/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Codigo,Nome,FuncionarioRepresentanteId")] Departamento departamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ViagemId,Situacao,Data")] SituacaoViagem situacaoViagem)
         {
-            if (id != departamento.Id)
+            if (id != situacaoViagem.Id)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace smk_travel.Controllers
             {
                 try
                 {
-                    _context.Update(departamento);
+                    _context.Update(situacaoViagem);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DepartamentoExists(departamento.Id))
+                    if (!SituacaoViagemExists(situacaoViagem.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace smk_travel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(departamento);
+            ViewData["ViagemId"] = new SelectList(_context.Viagens, "Id", "Arquivo", situacaoViagem.ViagemId);
+            return View(situacaoViagem);
         }
 
-        // GET: Departamentos/Delete/5
+        // GET: SituacaoViagens/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos
+            var situacaoViagem = await _context.SituacaoViagem
+                .Include(s => s.Viagem)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (departamento == null)
+            if (situacaoViagem == null)
             {
                 return NotFound();
             }
 
-            return View(departamento);
+            return View(situacaoViagem);
         }
 
-        // POST: Departamentos/Delete/5
+        // POST: SituacaoViagens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var departamento = await _context.Departamentos.FindAsync(id);
-            _context.Departamentos.Remove(departamento);
+            var situacaoViagem = await _context.SituacaoViagem.FindAsync(id);
+            _context.SituacaoViagem.Remove(situacaoViagem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DepartamentoExists(int id)
+        private bool SituacaoViagemExists(int id)
         {
-            return _context.Departamentos.Any(e => e.Id == id);
+            return _context.SituacaoViagem.Any(e => e.Id == id);
         }
     }
 }

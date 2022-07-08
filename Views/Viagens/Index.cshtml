@@ -13,6 +13,12 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.NumeroBilhete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Referencia)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Funcionario)
             </th>
             <th>
@@ -64,13 +70,31 @@
                 @Html.DisplayNameFor(model => model.EstadoDaViagem)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Valor)
+                @Html.DisplayNameFor(model => model.TotalBilhete)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Taxa)
+                @Html.DisplayNameFor(model => model.CustoBilhete)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Taxa1)
+                @Html.DisplayNameFor(model => model.CustoReemissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaxaReembolso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustoNoShow)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Processo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataSolicitacaoInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataSolicitacaoFim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arquivo)
             </th>
             <th></th>
         </tr>
@@ -78,6 +102,12 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroBilhete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Referencia)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Funcionario.Codigo)
             </td>
@@ -130,13 +160,31 @@
                 @Html.DisplayFor(modelItem => item.EstadoDaViagem.Codigo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Valor)
+                @Html.DisplayFor(modelItem => item.TotalBilhete)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Taxa)
+                @Html.DisplayFor(modelItem => item.CustoBilhete)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Taxa1)
+                @Html.DisplayFor(modelItem => item.CustoReemissao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaxaReembolso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustoNoShow)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Processo.Comentarios)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataSolicitacaoInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataSolicitacaoFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arquivo)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

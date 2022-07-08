@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace smk_travel.Migrations
 {
-    public partial class NovasTabelas20220707 : Migration
+    public partial class Migracoes20220807 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -89,11 +89,26 @@ namespace smk_travel.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     codigo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                    nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    funcionarioRepresentanteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_departamentos", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "entidades",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    codigo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_entidades", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,6 +170,20 @@ namespace smk_travel.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "profissoes",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    codigo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_profissoes", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "sites",
                 columns: table => new
                 {
@@ -191,7 +220,9 @@ namespace smk_travel.Migrations
                     codigo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     nome = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     departamentoId = table.Column<int>(type: "int", nullable: false),
-                    centroDeCustoId = table.Column<int>(type: "int", nullable: false)
+                    centroDeCustoId = table.Column<int>(type: "int", nullable: false),
+                    entidadeId = table.Column<int>(type: "int", nullable: false),
+                    profissaoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -206,6 +237,18 @@ namespace smk_travel.Migrations
                         name: "FK_funcionarios_departamentos_departamentoId",
                         column: x => x.departamentoId,
                         principalTable: "departamentos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_funcionarios_entidades_entidadeId",
+                        column: x => x.entidadeId,
+                        principalTable: "entidades",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_funcionarios_profissoes_profissaoId",
+                        column: x => x.profissaoId,
+                        principalTable: "profissoes",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -226,6 +269,8 @@ namespace smk_travel.Migrations
                     comentarios = table.Column<string>(type: "Text", nullable: false),
                     diasDeTrabalho = table.Column<int>(type: "int", nullable: false),
                     data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dataSolicitacaoInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dataSolicitacaoFim = table.Column<DateTime>(type: "datetime2", nullable: false),
                     dataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     dataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -264,6 +309,8 @@ namespace smk_travel.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    numeroBilhete = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    referencia = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     funcionarioId = table.Column<int>(type: "int", nullable: false),
                     itinerarioId = table.Column<int>(type: "int", nullable: false),
                     CompanhiaAereaId = table.Column<int>(type: "int", nullable: false),
@@ -281,9 +328,15 @@ namespace smk_travel.Migrations
                     classeId = table.Column<int>(type: "int", nullable: false),
                     tipoDeBilheteId = table.Column<int>(type: "int", nullable: false),
                     estadoDaViagemId = table.Column<int>(type: "int", nullable: false),
-                    valor = table.Column<double>(type: "float", nullable: false),
-                    taxa = table.Column<double>(type: "float", nullable: false),
-                    taxa1 = table.Column<double>(type: "float", nullable: false)
+                    totalBilhete = table.Column<double>(type: "float", nullable: false),
+                    custoBilhete = table.Column<double>(type: "float", nullable: false),
+                    custoReemissao = table.Column<double>(type: "float", nullable: false),
+                    taxaReembolso = table.Column<double>(type: "float", nullable: false),
+                    custoNoShow = table.Column<double>(type: "float", nullable: false),
+                    processoId = table.Column<int>(type: "int", nullable: false),
+                    dataSolicitacaoInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    dataSolicitacaoFim = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    arquivo = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -331,6 +384,11 @@ namespace smk_travel.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_viagens_processos_processoId",
+                        column: x => x.processoId,
+                        principalTable: "processos",
+                        principalColumn: "id");
+                    table.ForeignKey(
                         name: "FK_viagens_tipoDeBilhetes_tipoDeBilheteId",
                         column: x => x.tipoDeBilheteId,
                         principalTable: "tipoDeBilhetes",
@@ -347,6 +405,16 @@ namespace smk_travel.Migrations
                 name: "IX_funcionarios_departamentoId",
                 table: "funcionarios",
                 column: "departamentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_funcionarios_entidadeId",
+                table: "funcionarios",
+                column: "entidadeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_funcionarios_profissaoId",
+                table: "funcionarios",
+                column: "profissaoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_processos_funcionarioId",
@@ -404,6 +472,11 @@ namespace smk_travel.Migrations
                 column: "motivoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_viagens_processoId",
+                table: "viagens",
+                column: "processoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_viagens_tipoDeBilheteId",
                 table: "viagens",
                 column: "tipoDeBilheteId");
@@ -418,13 +491,7 @@ namespace smk_travel.Migrations
                 name: "fornecedores");
 
             migrationBuilder.DropTable(
-                name: "processos");
-
-            migrationBuilder.DropTable(
                 name: "viagens");
-
-            migrationBuilder.DropTable(
-                name: "sites");
 
             migrationBuilder.DropTable(
                 name: "alojamentos");
@@ -439,6 +506,12 @@ namespace smk_travel.Migrations
                 name: "estadoDaViagens");
 
             migrationBuilder.DropTable(
+                name: "processos");
+
+            migrationBuilder.DropTable(
+                name: "tipoDeBilhetes");
+
+            migrationBuilder.DropTable(
                 name: "funcionarios");
 
             migrationBuilder.DropTable(
@@ -448,13 +521,19 @@ namespace smk_travel.Migrations
                 name: "motivos");
 
             migrationBuilder.DropTable(
-                name: "tipoDeBilhetes");
+                name: "sites");
 
             migrationBuilder.DropTable(
                 name: "centroDeCustos");
 
             migrationBuilder.DropTable(
                 name: "departamentos");
+
+            migrationBuilder.DropTable(
+                name: "entidades");
+
+            migrationBuilder.DropTable(
+                name: "profissoes");
         }
     }
 }

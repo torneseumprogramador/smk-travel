@@ -1,4 +1,4 @@
-@model IEnumerable<smk_travel.Models.Departamento>
+@model IEnumerable<smk_travel.Models.Profissao>
 
 @{
     ViewData["Title"] = "Index";
@@ -18,9 +18,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FuncionarioRepresentanteId)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -32,9 +29,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FuncionarioRepresentanteId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

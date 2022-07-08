@@ -14,6 +14,16 @@ public class Viagem
     public int Id { get; set; }
 
     [Required]
+    [MaxLength(50)]
+    [Column("numeroBilhete")]
+    public string NumeroBilhete { get; set; }
+
+    [Required]
+    [MaxLength(50)]
+    [Column("referencia")]
+    public string Referencia { get; set; }
+
+    [Required]
     [Column("funcionarioId")]
     public int FuncionarioId { get; set; }
     public Funcionario Funcionario { get; set; }
@@ -90,14 +100,40 @@ public class Viagem
     public EstadoDaViagem EstadoDaViagem { get; set; }
 
     [Required]
-    [Column("valor")]
-    public double Valor { get; set; }
+    [Column("totalBilhete")]
+    public double TotalBilhete { get; set; }
 
     [Required]
-    [Column("taxa")]
-    public double Taxa { get; set; }
+    [Column("custoBilhete")]
+    public double CustoBilhete { get; set; }
 
     [Required]
-    [Column("taxa1")]
-    public double Taxa1 { get; set; }
+    [Column("custoReemissao")]
+    public double CustoReemissao { get; set; }
+
+    [Required]
+    [Column("taxaReembolso")]
+    public double TaxaReembolso { get; set; }
+
+    [Required]
+    [Column("custoNoShow")]
+    public double CustoNoShow { get; set; }
+
+    [Required]
+    [Column("processoId")]
+    public int ProcessoId { get; set; }
+    public Processo Processo { get; set; }
+
+    [Required]
+    [Column("dataSolicitacaoInicio")]
+    public DateTime DataSolicitacaoInicio { get; set; }
+
+    [Required]
+    [Column("dataSolicitacaoFim")]
+    public DateTime DataSolicitacaoFim { get; set; }
+
+    [Required]
+    [MaxLength(255)]
+    [Column("arquivo")]
+    public string Arquivo { get; set; }
 }

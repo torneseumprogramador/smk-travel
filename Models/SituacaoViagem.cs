@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace smk_travel.Models;
 
-[Table("departamentos")]
-public class Departamento
+[Table("SituacaoViagens")]
+public class SituacaoViagem
 {
     [Key]
     [Required]
@@ -14,16 +14,16 @@ public class Departamento
     public int Id { get; set; }
 
     [Required]
-    [Column("codigo")]
-    [MaxLength(50)]
-    public string Codigo { get; set; }
+    [Column("ViagemId")]
+    public int ViagemId { get; set; }
+    public Viagem Viagem { get; set; }
 
     [Required]
     [MaxLength(150)]
-    [Column("nome")]
-    public string Nome { get; set; }
+    [Column("situacao")]
+    public string Situacao { get; set; }
 
     [Required]
-    [Column("funcionarioRepresentanteId")]
-    public int FuncionarioRepresentanteId { get; set; }
+    [Column("data")]
+    public DateTime Data { get; set; }
 }

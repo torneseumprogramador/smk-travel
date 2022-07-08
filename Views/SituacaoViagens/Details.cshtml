@@ -1,4 +1,4 @@
-@model smk_travel.Models.Departamento
+@model smk_travel.Models.SituacaoViagem
 
 @{
     ViewData["Title"] = "Details";
@@ -7,26 +7,26 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Departamento</h4>
+    <h4>SituacaoViagem</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Codigo)
+            @Html.DisplayNameFor(model => model.Viagem)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Codigo)
+            @Html.DisplayFor(model => model.Viagem.Arquivo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(model => model.Situacao)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
+            @Html.DisplayFor(model => model.Situacao)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FuncionarioRepresentanteId)
+            @Html.DisplayNameFor(model => model.Data)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FuncionarioRepresentanteId)
+            @Html.DisplayFor(model => model.Data)
         </dd>
     </dl>
 </div>

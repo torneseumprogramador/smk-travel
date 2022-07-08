@@ -63,7 +63,7 @@ namespace smk_travel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FuncionarioId,ItinerarioId,SiteId,DataSaida,DataChagada,MotivoId,TesteCovid,Comentarios,DiasDeTrabalho,Data,DataCriacao,DataAtualizacao")] Processo processo)
+        public async Task<IActionResult> Create([Bind("Id,FuncionarioId,ItinerarioId,SiteId,DataSaida,DataChagada,MotivoId,TesteCovid,Comentarios,DiasDeTrabalho,Data,DataSolicitacaoInicio,DataSolicitacaoFim,DataCriacao,DataAtualizacao")] Processo processo)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace smk_travel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FuncionarioId,ItinerarioId,SiteId,DataSaida,DataChagada,MotivoId,TesteCovid,Comentarios,DiasDeTrabalho,Data,DataCriacao,DataAtualizacao")] Processo processo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FuncionarioId,ItinerarioId,SiteId,DataSaida,DataChagada,MotivoId,TesteCovid,Comentarios,DiasDeTrabalho,Data,DataSolicitacaoInicio,DataSolicitacaoFim,DataCriacao,DataAtualizacao")] Processo processo)
         {
             if (id != processo.Id)
             {

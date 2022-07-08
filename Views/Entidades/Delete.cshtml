@@ -1,4 +1,4 @@
-@model smk_travel.Models.Departamento
+@model smk_travel.Models.Entidade
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Departamento</h4>
+    <h4>Entidade</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -22,12 +22,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FuncionarioRepresentanteId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FuncionarioRepresentanteId)
         </dd>
     </dl>
     

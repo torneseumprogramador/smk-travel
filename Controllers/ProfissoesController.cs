@@ -10,22 +10,22 @@ using smk_travel.Servicos.Database;
 
 namespace smk_travel.Controllers
 {
-    public class DepartamentosController : Controller
+    public class ProfissoesController : Controller
     {
         private readonly DbContexto _context;
 
-        public DepartamentosController(DbContexto context)
+        public ProfissoesController(DbContexto context)
         {
             _context = context;
         }
 
-        // GET: Departamentos
+        // GET: Profissoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Departamentos.ToListAsync());
+            return View(await _context.Profissao.ToListAsync());
         }
 
-        // GET: Departamentos/Details/5
+        // GET: Profissoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos
+            var profissao = await _context.Profissao
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (departamento == null)
+            if (profissao == null)
             {
                 return NotFound();
             }
 
-            return View(departamento);
+            return View(profissao);
         }
 
-        // GET: Departamentos/Create
+        // GET: Profissoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Departamentos/Create
+        // POST: Profissoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Codigo,Nome,FuncionarioRepresentanteId")] Departamento departamento)
+        public async Task<IActionResult> Create([Bind("Id,Codigo,Nome")] Profissao profissao)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(departamento);
+                _context.Add(profissao);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(departamento);
+            return View(profissao);
         }
 
-        // GET: Departamentos/Edit/5
+        // GET: Profissoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos.FindAsync(id);
-            if (departamento == null)
+            var profissao = await _context.Profissao.FindAsync(id);
+            if (profissao == null)
             {
                 return NotFound();
             }
-            return View(departamento);
+            return View(profissao);
         }
 
-        // POST: Departamentos/Edit/5
+        // POST: Profissoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Codigo,Nome,FuncionarioRepresentanteId")] Departamento departamento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Codigo,Nome")] Profissao profissao)
         {
-            if (id != departamento.Id)
+            if (id != profissao.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace smk_travel.Controllers
             {
                 try
                 {
-                    _context.Update(departamento);
+                    _context.Update(profissao);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DepartamentoExists(departamento.Id))
+                    if (!ProfissaoExists(profissao.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace smk_travel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(departamento);
+            return View(profissao);
         }
 
-        // GET: Departamentos/Delete/5
+        // GET: Profissoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var departamento = await _context.Departamentos
+            var profissao = await _context.Profissao
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (departamento == null)
+            if (profissao == null)
             {
                 return NotFound();
             }
 
-            return View(departamento);
+            return View(profissao);
         }
 
-        // POST: Departamentos/Delete/5
+        // POST: Profissoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var departamento = await _context.Departamentos.FindAsync(id);
-            _context.Departamentos.Remove(departamento);
+            var profissao = await _context.Profissao.FindAsync(id);
+            _context.Profissao.Remove(profissao);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DepartamentoExists(int id)
+        private bool ProfissaoExists(int id)
         {
-            return _context.Departamentos.Any(e => e.Id == id);
+            return _context.Profissao.Any(e => e.Id == id);
         }
     }
 }

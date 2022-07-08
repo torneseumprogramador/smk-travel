@@ -34,6 +34,16 @@
                 <span asp-validation-for="CentroDeCustoId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="EntidadeId" class="control-label"></label>
+                <select asp-for="EntidadeId" class="form-control" asp-items="ViewBag.EntidadeId"></select>
+                <span asp-validation-for="EntidadeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProfissaoId" class="control-label"></label>
+                <select asp-for="ProfissaoId" class="form-control" asp-items="ViewBag.ProfissaoId"></select>
+                <span asp-validation-for="ProfissaoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

@@ -185,6 +185,10 @@ namespace smk_travel.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnName("codigo");
 
+                    b.Property<int>("FuncionarioRepresentanteId")
+                        .HasColumnType("int")
+                        .HasColumnName("funcionarioRepresentanteId");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -194,6 +198,32 @@ namespace smk_travel.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("departamentos");
+                });
+
+            modelBuilder.Entity("smk_travel.Models.Entidade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("codigo");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
+                        .HasColumnName("nome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("entidades");
                 });
 
             modelBuilder.Entity("smk_travel.Models.EstadoDaViagem", b =>
@@ -283,17 +313,29 @@ namespace smk_travel.Migrations
                         .HasColumnType("int")
                         .HasColumnName("departamentoId");
 
+                    b.Property<int>("EntidadeId")
+                        .HasColumnType("int")
+                        .HasColumnName("entidadeId");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)")
                         .HasColumnName("nome");
 
+                    b.Property<int>("ProfissaoId")
+                        .HasColumnType("int")
+                        .HasColumnName("profissaoId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CentroDeCustoId");
 
                     b.HasIndex("DepartamentoId");
+
+                    b.HasIndex("EntidadeId");
+
+                    b.HasIndex("ProfissaoId");
 
                     b.ToTable("funcionarios");
                 });
@@ -384,6 +426,14 @@ namespace smk_travel.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("dataSaida");
 
+                    b.Property<DateTime>("DataSolicitacaoFim")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dataSolicitacaoFim");
+
+                    b.Property<DateTime>("DataSolicitacaoInicio")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dataSolicitacaoInicio");
+
                     b.Property<int>("DiasDeTrabalho")
                         .HasColumnType("int")
                         .HasColumnName("diasDeTrabalho");
@@ -419,6 +469,32 @@ namespace smk_travel.Migrations
                     b.HasIndex("SiteId");
 
                     b.ToTable("processos");
+                });
+
+            modelBuilder.Entity("smk_travel.Models.Profissao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("codigo");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
+                        .HasColumnName("nome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("profissoes");
                 });
 
             modelBuilder.Entity("smk_travel.Models.Site", b =>
@@ -486,6 +562,12 @@ namespace smk_travel.Migrations
                         .HasColumnType("int")
                         .HasColumnName("alojamentoId");
 
+                    b.Property<string>("Arquivo")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("arquivo");
+
                     b.Property<int>("Classeid")
                         .HasColumnType("int")
                         .HasColumnName("classeId");
@@ -498,6 +580,18 @@ namespace smk_travel.Migrations
                     b.Property<int>("CompanhiaAereaId")
                         .HasColumnType("int")
                         .HasColumnName("CompanhiaAereaId");
+
+                    b.Property<double>("CustoBilhete")
+                        .HasColumnType("float")
+                        .HasColumnName("custoBilhete");
+
+                    b.Property<double>("CustoNoShow")
+                        .HasColumnType("float")
+                        .HasColumnName("custoNoShow");
+
+                    b.Property<double>("CustoReemissao")
+                        .HasColumnType("float")
+                        .HasColumnName("custoReemissao");
 
                     b.Property<DateTime>("DataAtualizacao")
                         .HasColumnType("datetime2")
@@ -514,6 +608,14 @@ namespace smk_travel.Migrations
                     b.Property<DateTime>("DataSaida")
                         .HasColumnType("datetime2")
                         .HasColumnName("dataSaida");
+
+                    b.Property<DateTime>("DataSolicitacaoFim")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dataSolicitacaoFim");
+
+                    b.Property<DateTime>("DataSolicitacaoInicio")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("dataSolicitacaoInicio");
 
                     b.Property<int>("DiasDeTrabalho")
                         .HasColumnType("int")
@@ -544,13 +646,26 @@ namespace smk_travel.Migrations
                         .HasColumnType("int")
                         .HasColumnName("motivoId");
 
-                    b.Property<double>("Taxa")
-                        .HasColumnType("float")
-                        .HasColumnName("taxa");
+                    b.Property<string>("NumeroBilhete")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("numeroBilhete");
 
-                    b.Property<double>("Taxa1")
+                    b.Property<int?>("ProcessoId")
+                        .IsRequired()
+                        .HasColumnType("int")
+                        .HasColumnName("processoId");
+
+                    b.Property<string>("Referencia")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("referencia");
+
+                    b.Property<double>("TaxaReembolso")
                         .HasColumnType("float")
-                        .HasColumnName("taxa1");
+                        .HasColumnName("taxaReembolso");
 
                     b.Property<bool>("TesteCovid")
                         .HasColumnType("bit")
@@ -560,9 +675,9 @@ namespace smk_travel.Migrations
                         .HasColumnType("int")
                         .HasColumnName("tipoDeBilheteId");
 
-                    b.Property<double>("Valor")
+                    b.Property<double>("TotalBilhete")
                         .HasColumnType("float")
-                        .HasColumnName("valor");
+                        .HasColumnName("totalBilhete");
 
                     b.HasKey("Id");
 
@@ -579,6 +694,8 @@ namespace smk_travel.Migrations
                     b.HasIndex("ItinerarioId");
 
                     b.HasIndex("MotivoId");
+
+                    b.HasIndex("ProcessoId");
 
                     b.HasIndex("TipoDeBilheteId");
 
@@ -599,9 +716,25 @@ namespace smk_travel.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("smk_travel.Models.Entidade", "Entidade")
+                        .WithMany()
+                        .HasForeignKey("EntidadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("smk_travel.Models.Profissao", "Profissao")
+                        .WithMany()
+                        .HasForeignKey("ProfissaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("CentroDeCusto");
 
                     b.Navigation("Departamento");
+
+                    b.Navigation("Entidade");
+
+                    b.Navigation("Profissao");
                 });
 
             modelBuilder.Entity("smk_travel.Models.Processo", b =>
@@ -683,6 +816,12 @@ namespace smk_travel.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("smk_travel.Models.Processo", "Processo")
+                        .WithMany()
+                        .HasForeignKey("ProcessoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("smk_travel.Models.TipoDeBilhete", "TipoDeBilhete")
                         .WithMany()
                         .HasForeignKey("TipoDeBilheteId")
@@ -702,6 +841,8 @@ namespace smk_travel.Migrations
                     b.Navigation("Itinerario");
 
                     b.Navigation("Motivo");
+
+                    b.Navigation("Processo");
 
                     b.Navigation("TipoDeBilhete");
                 });
