@@ -22,7 +22,7 @@ namespace smk_travel.Controllers
         // GET: Profissoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Profissao.ToListAsync());
+            return View(await _context.Profissoes.ToListAsync());
         }
 
         // GET: Profissoes/Details/5
@@ -33,7 +33,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var profissao = await _context.Profissao
+            var profissao = await _context.Profissoes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (profissao == null)
             {
@@ -73,7 +73,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var profissao = await _context.Profissao.FindAsync(id);
+            var profissao = await _context.Profissoes.FindAsync(id);
             if (profissao == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var profissao = await _context.Profissao
+            var profissao = await _context.Profissoes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (profissao == null)
             {
@@ -139,15 +139,15 @@ namespace smk_travel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var profissao = await _context.Profissao.FindAsync(id);
-            _context.Profissao.Remove(profissao);
+            var profissao = await _context.Profissoes.FindAsync(id);
+            _context.Profissoes.Remove(profissao);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProfissaoExists(int id)
         {
-            return _context.Profissao.Any(e => e.Id == id);
+            return _context.Profissoes.Any(e => e.Id == id);
         }
     }
 }

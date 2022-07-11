@@ -23,7 +23,6 @@ public class Departamento
     [Column("nome")]
     public string Nome { get; set; }
 
-    [Required]
     [Column("funcionarioRepresentanteId")]
-    public int FuncionarioRepresentanteId { get; set; }
+    public int? FuncionarioRepresentanteId { get; set; }
 }

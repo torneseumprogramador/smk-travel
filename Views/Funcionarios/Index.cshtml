@@ -43,18 +43,19 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Departamento.Codigo)
+                @Html.DisplayFor(modelItem => item.Departamento.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CentroDeCusto.Codigo)
+                @Html.DisplayFor(modelItem => item.CentroDeCusto.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Entidade.Codigo)
+                @Html.DisplayFor(modelItem => item.Entidade.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Profissao.Codigo)
+                @Html.DisplayFor(modelItem => item.Profissao.Nome)
             </td>
             <td>
+                <a href="/funcionarios/@item.Id/ArquivoDeFuncionarios">Documentos</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

@@ -20,6 +20,7 @@ namespace smk_travel.Controllers
         }
 
         // GET: Funcionarios
+        [Route("/Funcionarios")]
         public async Task<IActionResult> Index()
         {
             var dbContexto = _context.Funcionarios.Include(f => f.CentroDeCusto).Include(f => f.Departamento).Include(f => f.Entidade).Include(f => f.Profissao);
@@ -27,6 +28,7 @@ namespace smk_travel.Controllers
         }
 
         // GET: Funcionarios/Details/5
+        [Route("/Funcionarios/Details/{id}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,12 +51,13 @@ namespace smk_travel.Controllers
         }
 
         // GET: Funcionarios/Create
+        [Route("/Funcionarios/Create")]
         public IActionResult Create()
         {
-            ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Codigo");
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Codigo");
-            ViewData["EntidadeId"] = new SelectList(_context.Entidade, "Id", "Codigo");
-            ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Codigo");
+            ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Nome");
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Nome");
+            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Nome");
+            ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Nome");
             return View();
         }
 
@@ -63,6 +66,7 @@ namespace smk_travel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("/Funcionarios/Create")]
         public async Task<IActionResult> Create([Bind("Id,Codigo,Nome,DepartamentoId,CentroDeCustoId,EntidadeId,ProfissaoId")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
@@ -73,12 +77,13 @@ namespace smk_travel.Controllers
             }
             ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Codigo", funcionario.CentroDeCustoId);
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Codigo", funcionario.DepartamentoId);
-            ViewData["EntidadeId"] = new SelectList(_context.Entidade, "Id", "Codigo", funcionario.EntidadeId);
+            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Codigo", funcionario.EntidadeId);
             ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Codigo", funcionario.ProfissaoId);
             return View(funcionario);
         }
 
         // GET: Funcionarios/Edit/5
+        [Route("/Funcionarios/Edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,7 +98,7 @@ namespace smk_travel.Controllers
             }
             ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Codigo", funcionario.CentroDeCustoId);
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Codigo", funcionario.DepartamentoId);
-            ViewData["EntidadeId"] = new SelectList(_context.Entidade, "Id", "Codigo", funcionario.EntidadeId);
+            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Codigo", funcionario.EntidadeId);
             ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Codigo", funcionario.ProfissaoId);
             return View(funcionario);
         }
@@ -103,6 +108,7 @@ namespace smk_travel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("/Funcionarios/Edit/{id}")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Codigo,Nome,DepartamentoId,CentroDeCustoId,EntidadeId,ProfissaoId")] Funcionario funcionario)
         {
             if (id != funcionario.Id)
@@ -132,12 +138,13 @@ namespace smk_travel.Controllers
             }
             ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Codigo", funcionario.CentroDeCustoId);
             ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Codigo", funcionario.DepartamentoId);
-            ViewData["EntidadeId"] = new SelectList(_context.Entidade, "Id", "Codigo", funcionario.EntidadeId);
+            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Codigo", funcionario.EntidadeId);
             ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Codigo", funcionario.ProfissaoId);
             return View(funcionario);
         }
 
         // GET: Funcionarios/Delete/5
+        [Route("/Funcionarios/Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -162,6 +169,7 @@ namespace smk_travel.Controllers
         // POST: Funcionarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("/Funcionarios/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var funcionario = await _context.Funcionarios.FindAsync(id);

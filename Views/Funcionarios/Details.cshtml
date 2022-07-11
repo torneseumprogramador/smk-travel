@@ -26,29 +26,30 @@
             @Html.DisplayNameFor(model => model.Departamento)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Departamento.Codigo)
+            @Html.DisplayFor(model => model.Departamento.Nome)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CentroDeCusto)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CentroDeCusto.Codigo)
+            @Html.DisplayFor(model => model.CentroDeCusto.Nome)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Entidade)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Entidade.Codigo)
+            @Html.DisplayFor(model => model.Entidade.Nome)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Profissao)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Profissao.Codigo)
+            @Html.DisplayFor(model => model.Profissao.Nome)
         </dd>
     </dl>
 </div>
 <div>
+    <a href="/funcionarios/@Model.Id/ArquivoDeFuncionarios">Documentos</a> |
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

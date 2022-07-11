@@ -22,7 +22,7 @@ namespace smk_travel.Controllers
         // GET: SituacaoViagens
         public async Task<IActionResult> Index()
         {
-            var dbContexto = _context.SituacaoViagem.Include(s => s.Viagem);
+            var dbContexto = _context.SituacaoViagens.Include(s => s.Viagem);
             return View(await dbContexto.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var situacaoViagem = await _context.SituacaoViagem
+            var situacaoViagem = await _context.SituacaoViagens
                 .Include(s => s.Viagem)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (situacaoViagem == null)
@@ -77,7 +77,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var situacaoViagem = await _context.SituacaoViagem.FindAsync(id);
+            var situacaoViagem = await _context.SituacaoViagens.FindAsync(id);
             if (situacaoViagem == null)
             {
                 return NotFound();
@@ -130,7 +130,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var situacaoViagem = await _context.SituacaoViagem
+            var situacaoViagem = await _context.SituacaoViagens
                 .Include(s => s.Viagem)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (situacaoViagem == null)
@@ -146,15 +146,15 @@ namespace smk_travel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var situacaoViagem = await _context.SituacaoViagem.FindAsync(id);
-            _context.SituacaoViagem.Remove(situacaoViagem);
+            var situacaoViagem = await _context.SituacaoViagens.FindAsync(id);
+            _context.SituacaoViagens.Remove(situacaoViagem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SituacaoViagemExists(int id)
         {
-            return _context.SituacaoViagem.Any(e => e.Id == id);
+            return _context.SituacaoViagens.Any(e => e.Id == id);
         }
     }
 }

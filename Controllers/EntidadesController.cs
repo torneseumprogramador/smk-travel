@@ -22,7 +22,7 @@ namespace smk_travel.Controllers
         // GET: Entidades
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Entidade.ToListAsync());
+            return View(await _context.Entidades.ToListAsync());
         }
 
         // GET: Entidades/Details/5
@@ -33,7 +33,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var entidade = await _context.Entidade
+            var entidade = await _context.Entidades
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (entidade == null)
             {
@@ -73,7 +73,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var entidade = await _context.Entidade.FindAsync(id);
+            var entidade = await _context.Entidades.FindAsync(id);
             if (entidade == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace smk_travel.Controllers
                 return NotFound();
             }
 
-            var entidade = await _context.Entidade
+            var entidade = await _context.Entidades
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (entidade == null)
             {
@@ -139,15 +139,15 @@ namespace smk_travel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var entidade = await _context.Entidade.FindAsync(id);
-            _context.Entidade.Remove(entidade);
+            var entidade = await _context.Entidades.FindAsync(id);
+            _context.Entidades.Remove(entidade);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EntidadeExists(int id)
         {
-            return _context.Entidade.Any(e => e.Id == id);
+            return _context.Entidades.Any(e => e.Id == id);
         }
     }
 }

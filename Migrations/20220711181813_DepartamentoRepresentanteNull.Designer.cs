@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using smk_travel.Servicos.Database;
 
@@ -11,9 +12,10 @@ using smk_travel.Servicos.Database;
 namespace smk_travel.Migrations
 {
     [DbContext(typeof(DbContexto))]
-    partial class DbContextoModelSnapshot : ModelSnapshot
+    [Migration("20220711181813_DepartamentoRepresentanteNull")]
+    partial class DepartamentoRepresentanteNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,32 +92,6 @@ namespace smk_travel.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("alojamentos");
-                });
-
-            modelBuilder.Entity("smk_travel.Models.ArquivoDeFuncionario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Arquivo")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("arquivo");
-
-                    b.Property<int>("FuncionarioId")
-                        .HasColumnType("int")
-                        .HasColumnName("funcionarioId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FuncionarioId");
-
-                    b.ToTable("arquivoDeFuncionarios");
                 });
 
             modelBuilder.Entity("smk_travel.Models.CentroDeCusto", b =>
@@ -755,17 +731,6 @@ namespace smk_travel.Migrations
                     b.HasIndex("TipoDeBilheteId");
 
                     b.ToTable("viagens");
-                });
-
-            modelBuilder.Entity("smk_travel.Models.ArquivoDeFuncionario", b =>
-                {
-                    b.HasOne("smk_travel.Models.Funcionario", "Funcionario")
-                        .WithMany()
-                        .HasForeignKey("FuncionarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Funcionario");
                 });
 
             modelBuilder.Entity("smk_travel.Models.Funcionario", b =>
