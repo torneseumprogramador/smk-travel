@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,14 +25,21 @@ namespace smk_travel.Controllers
         [Route("/Funcionarios/{funcionarioId}/ArquivoDeFuncionarios/")]
         public async Task<IActionResult> Index([FromRoute] int funcionarioId)
         {
+            carregaFuncionarioViewBag(funcionarioId);
             var dbContexto = _context.ArquivoDeFuncionarios.Include(a => a.Funcionario);
             return View(await dbContexto.ToListAsync());
+        }
+
+        private void carregaFuncionarioViewBag(int funcionarioId)
+        {
+            ViewData["Funcionario"] = _context.Funcionarios.Find(funcionarioId);
         }
 
         // GET: ArquivoDeFuncionarios/Details/5
         [Route("/Funcionarios/{funcionarioId}/ArquivoDeFuncionarios/Details/{id}")]
         public async Task<IActionResult> Details([FromRoute] int funcionarioId, int? id)
         {
+            carregaFuncionarioViewBag(funcionarioId);
             if (id == null)
             {
                 return NotFound();
@@ -51,6 +60,8 @@ namespace smk_travel.Controllers
         [Route("/Funcionarios/{funcionarioId}/ArquivoDeFuncionarios/Create")]
         public IActionResult Create([FromRoute] int funcionarioId)
         {
+            carregaFuncionarioViewBag(funcionarioId);
+            
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo");
             return View();
         }
@@ -61,67 +72,29 @@ namespace smk_travel.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("/Funcionarios/{funcionarioId}/ArquivoDeFuncionarios/Create")]
-        public async Task<IActionResult> Create([FromRoute] int funcionarioId, [Bind("Id,Arquivo,FuncionarioId")] ArquivoDeFuncionario arquivoDeFuncionario)
+        public async Task<IActionResult> Create([FromRoute] int funcionarioId, IFormFile Arquivo, [Bind("Id,FuncionarioId")] ArquivoDeFuncionario arquivoDeFuncionario)
         {
+            carregaFuncionarioViewBag(funcionarioId);
+
+            var path = AppDomain.CurrentDomain.BaseDirectory.Replace("/bin/Debug/net6.0/", "");
+
+            string uploads = Path.Combine($"{path}/wwwroot/", "uploads");
+            if (Arquivo.Length > 0) 
+            {
+                string filePath = Path.Combine(uploads, Arquivo.FileName);
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create)) 
+                {
+                    await Arquivo.CopyToAsync(fileStream);
+                }
+            }
+
+            var arquivo = $"/uploads/{Arquivo.FileName}";
+
             if (ModelState.IsValid)
             {
+                arquivoDeFuncionario.Arquivo = arquivo;
                 _context.Add(arquivoDeFuncionario);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", arquivoDeFuncionario.FuncionarioId);
-            return View(arquivoDeFuncionario);
-        }
-
-        // GET: ArquivoDeFuncionarios//5
-        [Route("/Funcionarios/{funcionarioId}/ArquivoDeFuncionarios/Edit/{id}")]
-        public async Task<IActionResult> Edit([FromRoute] int funcionarioId, int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var arquivoDeFuncionario = await _context.ArquivoDeFuncionarios.FindAsync(id);
-            if (arquivoDeFuncionario == null)
-            {
-                return NotFound();
-            }
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", arquivoDeFuncionario.FuncionarioId);
-            return View(arquivoDeFuncionario);
-        }
-
-        // POST: ArquivoDeFuncionarios/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Route("/Funcionarios/{funcionarioId}/ArquivoDeFuncionarios/Edit/{id}")]
-        public async Task<IActionResult> Edit([FromRoute] int funcionarioId, int id, [Bind("Id,Arquivo,FuncionarioId")] ArquivoDeFuncionario arquivoDeFuncionario)
-        {
-            if (id != arquivoDeFuncionario.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(arquivoDeFuncionario);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ArquivoDeFuncionarioExists(arquivoDeFuncionario.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", arquivoDeFuncionario.FuncionarioId);
@@ -132,6 +105,7 @@ namespace smk_travel.Controllers
         [Route("/Funcionarios/{funcionarioId}/ArquivoDeFuncionarios/Delete/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int funcionarioId, int? id)
         {
+            carregaFuncionarioViewBag(funcionarioId);
             if (id == null)
             {
                 return NotFound();
