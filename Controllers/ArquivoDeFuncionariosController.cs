@@ -35,27 +35,6 @@ namespace smk_travel.Controllers
             ViewData["Funcionario"] = _context.Funcionarios.Find(funcionarioId);
         }
 
-        // GET: ArquivoDeFuncionarios/Details/5
-        [Route("/Funcionarios/{funcionarioId}/ArquivoDeFuncionarios/Details/{id}")]
-        public async Task<IActionResult> Details([FromRoute] int funcionarioId, int? id)
-        {
-            carregaFuncionarioViewBag(funcionarioId);
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var arquivoDeFuncionario = await _context.ArquivoDeFuncionarios
-                .Include(a => a.Funcionario)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (arquivoDeFuncionario == null)
-            {
-                return NotFound();
-            }
-
-            return View(arquivoDeFuncionario);
-        }
-
         // GET: ArquivoDeFuncionarios/Create
         [Route("/Funcionarios/{funcionarioId}/ArquivoDeFuncionarios/Create")]
         public IActionResult Create([FromRoute] int funcionarioId)
@@ -89,13 +68,15 @@ namespace smk_travel.Controllers
             }
 
             var arquivo = $"/uploads/{Arquivo.FileName}";
+            
+            arquivoDeFuncionario.FuncionarioId = funcionarioId;
+            arquivoDeFuncionario.Arquivo = arquivo;
 
-            if (ModelState.IsValid)
+            if (!string.IsNullOrEmpty(arquivoDeFuncionario.Arquivo))
             {
-                arquivoDeFuncionario.Arquivo = arquivo;
                 _context.Add(arquivoDeFuncionario);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect($"/funcionarios/{funcionarioId}/ArquivoDeFuncionarios");
             }
             ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", arquivoDeFuncionario.FuncionarioId);
             return View(arquivoDeFuncionario);

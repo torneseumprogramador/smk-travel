@@ -25,11 +25,11 @@
         <tr>
             <td>
                 <a href="@Html.DisplayFor(modelItem => item.Arquivo)" target="_blank">
-                    @Html.DisplayFor(modelItem => item.Arquivo)
+                    @Html.Raw(smk_travel.Helpers.ApplicationHelper.RenderHtmlFile(item.Arquivo, 200));
                 </a>
             </td>
             <td>
-                <a href="/funcionarios/@funcionario.Id/ArquivoDeFuncionarios/Delete/@item.Id" >Delete</a>
+                <a class="btn btn-danger" href="/funcionarios/@funcionario.Id/ArquivoDeFuncionarios/Delete/@item.Id">Delete</a>
             </td>
         </tr>
         }
