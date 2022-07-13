@@ -56,15 +56,15 @@ namespace smk_travel.Controllers
         // GET: Viagens/Create
         public IActionResult Create()
         {
-            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo");
-            ViewData["Classeid"] = new SelectList(_context.Classes, "Id", "Codigo");
-            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo");
-            ViewData["EstadoDaViagemId"] = new SelectList(_context.EstadoDaViagens, "Id", "Codigo");
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo");
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo");
-            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo");
+            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Nome");
+            ViewData["Classeid"] = new SelectList(_context.Classes, "Id", "Nome");
+            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Nome");
+            ViewData["EstadoDaViagemId"] = new SelectList(_context.EstadoDaViagens, "Id", "Nome");
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome");
+            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Nome");
+            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Nome");
             ViewData["ProcessoId"] = new SelectList(_context.Processos, "Id", "Comentarios");
-            ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Codigo");
+            ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Nome");
             return View();
         }
 
@@ -81,15 +81,15 @@ namespace smk_travel.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
-            ViewData["Classeid"] = new SelectList(_context.Classes, "Id", "Codigo", viagem.Classeid);
-            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
-            ViewData["EstadoDaViagemId"] = new SelectList(_context.EstadoDaViagens, "Id", "Codigo", viagem.EstadoDaViagemId);
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
-            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo", viagem.MotivoId);
+            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Nome", viagem.AlojamentoId);
+            ViewData["Classeid"] = new SelectList(_context.Classes, "Id", "Nome", viagem.Classeid);
+            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Nome", viagem.CompanhiaAereaId);
+            ViewData["EstadoDaViagemId"] = new SelectList(_context.EstadoDaViagens, "Id", "Nome", viagem.EstadoDaViagemId);
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome", viagem.FuncionarioId);
+            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Nome", viagem.ItinerarioId);
+            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Nome", viagem.MotivoId);
             ViewData["ProcessoId"] = new SelectList(_context.Processos, "Id", "Comentarios", viagem.ProcessoId);
-            ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Codigo", viagem.TipoDeBilheteId);
+            ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Nome", viagem.TipoDeBilheteId);
             return View(viagem);
         }
 
@@ -106,15 +106,15 @@ namespace smk_travel.Controllers
             {
                 return NotFound();
             }
-            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
-            ViewData["Classeid"] = new SelectList(_context.Classes, "Id", "Codigo", viagem.Classeid);
-            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
-            ViewData["EstadoDaViagemId"] = new SelectList(_context.EstadoDaViagens, "Id", "Codigo", viagem.EstadoDaViagemId);
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
-            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo", viagem.MotivoId);
+            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Nome", viagem.AlojamentoId);
+            ViewData["Classeid"] = new SelectList(_context.Classes, "Id", "Nome", viagem.Classeid);
+            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Nome", viagem.CompanhiaAereaId);
+            ViewData["EstadoDaViagemId"] = new SelectList(_context.EstadoDaViagens, "Id", "Nome", viagem.EstadoDaViagemId);
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome", viagem.FuncionarioId);
+            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Nome", viagem.ItinerarioId);
+            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Nome", viagem.MotivoId);
             ViewData["ProcessoId"] = new SelectList(_context.Processos, "Id", "Comentarios", viagem.ProcessoId);
-            ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Codigo", viagem.TipoDeBilheteId);
+            ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Nome", viagem.TipoDeBilheteId);
             return View(viagem);
         }
 
@@ -150,15 +150,15 @@ namespace smk_travel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Codigo", viagem.AlojamentoId);
-            ViewData["Classeid"] = new SelectList(_context.Classes, "Id", "Codigo", viagem.Classeid);
-            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Codigo", viagem.CompanhiaAereaId);
-            ViewData["EstadoDaViagemId"] = new SelectList(_context.EstadoDaViagens, "Id", "Codigo", viagem.EstadoDaViagemId);
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", viagem.FuncionarioId);
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", viagem.ItinerarioId);
-            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo", viagem.MotivoId);
+            ViewData["AlojamentoId"] = new SelectList(_context.Alojamentos, "Id", "Nome", viagem.AlojamentoId);
+            ViewData["Classeid"] = new SelectList(_context.Classes, "Id", "Nome", viagem.Classeid);
+            ViewData["CompanhiaAereaId"] = new SelectList(_context.CompanhiaAereas, "Id", "Nome", viagem.CompanhiaAereaId);
+            ViewData["EstadoDaViagemId"] = new SelectList(_context.EstadoDaViagens, "Id", "Nome", viagem.EstadoDaViagemId);
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome", viagem.FuncionarioId);
+            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Nome", viagem.ItinerarioId);
+            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Nome", viagem.MotivoId);
             ViewData["ProcessoId"] = new SelectList(_context.Processos, "Id", "Comentarios", viagem.ProcessoId);
-            ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Codigo", viagem.TipoDeBilheteId);
+            ViewData["TipoDeBilheteId"] = new SelectList(_context.TipoDeBilhetes, "Id", "Nome", viagem.TipoDeBilheteId);
             return View(viagem);
         }
 

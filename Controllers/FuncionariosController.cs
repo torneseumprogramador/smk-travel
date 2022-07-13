@@ -67,7 +67,7 @@ namespace smk_travel.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("/Funcionarios/Create")]
-        public async Task<IActionResult> Create([Bind("Id,Codigo,Nome,DepartamentoId,CentroDeCustoId,EntidadeId,ProfissaoId")] Funcionario funcionario)
+        public async Task<IActionResult> Create([Bind("Id,Codigo,Nome, Bi,DepartamentoId,CentroDeCustoId,EntidadeId,ProfissaoId")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
@@ -75,10 +75,10 @@ namespace smk_travel.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Codigo", funcionario.CentroDeCustoId);
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Codigo", funcionario.DepartamentoId);
-            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Codigo", funcionario.EntidadeId);
-            ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Codigo", funcionario.ProfissaoId);
+            ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Nome", funcionario.CentroDeCustoId);
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Nome", funcionario.DepartamentoId);
+            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Nome", funcionario.EntidadeId);
+            ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Nome", funcionario.ProfissaoId);
             return View(funcionario);
         }
 
@@ -96,10 +96,10 @@ namespace smk_travel.Controllers
             {
                 return NotFound();
             }
-            ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Codigo", funcionario.CentroDeCustoId);
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Codigo", funcionario.DepartamentoId);
-            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Codigo", funcionario.EntidadeId);
-            ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Codigo", funcionario.ProfissaoId);
+            ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Nome", funcionario.CentroDeCustoId);
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Nome", funcionario.DepartamentoId);
+            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Nome", funcionario.EntidadeId);
+            ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Nome", funcionario.ProfissaoId);
             return View(funcionario);
         }
 
@@ -109,7 +109,7 @@ namespace smk_travel.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("/Funcionarios/Edit/{id}")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Codigo,Nome,DepartamentoId,CentroDeCustoId,EntidadeId,ProfissaoId")] Funcionario funcionario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Codigo,Nome,Bi,DepartamentoId,CentroDeCustoId,EntidadeId,ProfissaoId")] Funcionario funcionario)
         {
             if (id != funcionario.Id)
             {
@@ -136,10 +136,10 @@ namespace smk_travel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Codigo", funcionario.CentroDeCustoId);
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Codigo", funcionario.DepartamentoId);
-            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Codigo", funcionario.EntidadeId);
-            ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Codigo", funcionario.ProfissaoId);
+            ViewData["CentroDeCustoId"] = new SelectList(_context.CentroDeCustos, "Id", "Nome", funcionario.CentroDeCustoId);
+            ViewData["DepartamentoId"] = new SelectList(_context.Departamentos, "Id", "Nome", funcionario.DepartamentoId);
+            ViewData["EntidadeId"] = new SelectList(_context.Entidades, "Id", "Nome", funcionario.EntidadeId);
+            ViewData["ProfissaoId"] = new SelectList(_context.Set<Profissao>(), "Id", "Nome", funcionario.ProfissaoId);
             return View(funcionario);
         }
 

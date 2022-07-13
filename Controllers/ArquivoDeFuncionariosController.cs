@@ -41,7 +41,7 @@ namespace smk_travel.Controllers
         {
             carregaFuncionarioViewBag(funcionarioId);
             
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo");
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome");
             return View();
         }
 
@@ -78,7 +78,7 @@ namespace smk_travel.Controllers
                 await _context.SaveChangesAsync();
                 return Redirect($"/funcionarios/{funcionarioId}/ArquivoDeFuncionarios");
             }
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", arquivoDeFuncionario.FuncionarioId);
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome", arquivoDeFuncionario.FuncionarioId);
             return View(arquivoDeFuncionario);
         }
 

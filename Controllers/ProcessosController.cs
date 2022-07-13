@@ -51,10 +51,10 @@ namespace smk_travel.Controllers
         // GET: Processos/Create
         public IActionResult Create()
         {
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo");
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo");
-            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo");
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Codigo");
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome");
+            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Nome");
+            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Nome");
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Nome");
             return View();
         }
 
@@ -71,10 +71,10 @@ namespace smk_travel.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", processo.FuncionarioId);
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", processo.ItinerarioId);
-            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo", processo.MotivoId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Codigo", processo.SiteId);
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome", processo.FuncionarioId);
+            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Nome", processo.ItinerarioId);
+            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Nome", processo.MotivoId);
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Nome", processo.SiteId);
             return View(processo);
         }
 
@@ -91,10 +91,10 @@ namespace smk_travel.Controllers
             {
                 return NotFound();
             }
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", processo.FuncionarioId);
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", processo.ItinerarioId);
-            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo", processo.MotivoId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Codigo", processo.SiteId);
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome", processo.FuncionarioId);
+            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Nome", processo.ItinerarioId);
+            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Nome", processo.MotivoId);
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Nome", processo.SiteId);
             return View(processo);
         }
 
@@ -130,10 +130,10 @@ namespace smk_travel.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Codigo", processo.FuncionarioId);
-            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Codigo", processo.ItinerarioId);
-            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Codigo", processo.MotivoId);
-            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Codigo", processo.SiteId);
+            ViewData["FuncionarioId"] = new SelectList(_context.Funcionarios, "Id", "Nome", processo.FuncionarioId);
+            ViewData["ItinerarioId"] = new SelectList(_context.Itinerarios, "Id", "Nome", processo.ItinerarioId);
+            ViewData["MotivoId"] = new SelectList(_context.Motivos, "Id", "Nome", processo.MotivoId);
+            ViewData["SiteId"] = new SelectList(_context.Sites, "Id", "Nome", processo.SiteId);
             return View(processo);
         }
 

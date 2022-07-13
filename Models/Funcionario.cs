@@ -42,4 +42,8 @@ public class Funcionario
     [Column("profissaoId")]
     public int ProfissaoId { get; set; }
     public Profissao Profissao { get; set; }
+
+    [Column("bi")]
+    [MaxLength(20)]
+    public string Bi { get; set; }
 }
