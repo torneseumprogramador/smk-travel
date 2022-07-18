@@ -27,6 +27,9 @@ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=SSeQrLv8e9r0My" \
 # Comandos para migração:
 ``` bash
 dotnet tool install --global dotnet-ef
+
+export PATH="$PATH:$HOME/.dotnet/tools/"
+
 dotnet ef migrations add ClienteAdd
 dotnet ef database update
 ```
