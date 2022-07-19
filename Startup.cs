@@ -25,7 +25,7 @@ namespace smk_travel
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connetionString = Configuration.GetConnectionString("DefaultConnection");
+            var connetionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
             services.AddDbContext<DbContexto>(options => options.UseSqlServer(connetionString));
             services.AddControllersWithViews();
         }
